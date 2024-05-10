@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign-Up Sheet - Balascopo</title>
+    <style>
+        body {
+            background-image: url('coquette.jpg');
+            background-size: cover;
+            max-width: 100%;
+            max-height: 100%;
+            background-position: center top;
+            font-family: Times New Roman, serif;
+            font-size: large;
+        }
+
+        .form-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .formbox {
+            flex: 1 1 auto;
+            min-width: 200px; 
+        }
+
+        input[type="text"], input[type="email"], textarea, select {
+            width: 100%; 
+            padding: 5px;
+            border: 1px solid #ccc;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus, input[type="email"]:focus, textarea:focus, select:focus {
+            border-color: green;
+            outline-color: green; 
+        }
+
+        input[type="text"]:invalid, input[type="email"]:invalid, textarea:invalid, select:invalid {
+            border-color: red;
+        }
+
+        input[type="password"]:focus {
+            border-color: green;
+            outline-color: green;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #abtuser {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Sign-Up Sheet - Balascopo</h2>
+<form id="signup-form" class="form-container">
+    <div class="formbox">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required onblur="this.style.borderColor = this.value ? 'green' : 'red';" onfocus="this.style.borderColor = 'green';">
+    </div>
+   
+    <div class="formbox">
+        <label for="username">Preferred Username:</label><br>
+        <input type="text" id="username" name="username" required onblur="this.style.borderColor = this.value ? 'green' : 'red';" onfocus="this.style.borderColor = 'green';">
+    </div>
+   
+    <div class="formbox">
+        <label for="gender">Gender:</label><br>
+        <select id="gender" name="gender" required onblur="this.style.borderColor = this.value ? 'green' : 'red';" onfocus="this.style.borderColor = 'green';">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="prefer-not-to-mention">Prefer Not to Mention</option>
+        </select>
+    </div>
+   
+    <div class="formbox">
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required onblur="this.style.borderColor = this.value ? 'green' : 'red';" onfocus="this.style.borderColor = 'green';">
+    </div>
+   
+    <div class="formbox">
+        <label for="email">Email Address:</label><br>
+        <input type="email" id="email" name="email" required onblur="this.style.borderColor = this.value ? 'green' : 'red';" onfocus="this.style.borderColor = 'green';">
+    </div>
+   
+    <div class="formbox">
+        <label for="address">Address:</label><br>
+        <textarea id="address" name="address" required onblur="this.style.borderColor = this.value ? 'green' : 'red';" onfocus="this.style.borderColor = 'green';"></textarea>
+    </div>
+   
+    <div class="formbox">
+        <label for="interest">Interests:</label><br>
+        <textarea id="interest" name="interest" required onblur="this.style.borderColor = this.value ? 'green' : 'red';" onfocus="this.style.borderColor = 'green';"></textarea>
+    </div>
+   
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
+</form>
+
+<div id="abtuser"></div>
+
+<script>
+    const form = document.getElementById('signup-form');
+    const userInfo = document.getElementById('abtuser');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); 
+        const formData = new FormData(form); 
+        const userData = {};
+        formData.forEach(function(value, key) {
+            userData[key] = value;
+        });
+        userInfo.innerHTML = '<h3>User Information:</h3>';
+        for (const key in userData) {
+            userInfo.innerHTML += `<p><strong>${key.charAt(0).toUpperCase() + key.slice(1)}:</strong> ${userData[key]}</p>`;
+        }
+    });
+
+    form.addEventListener('reset', function() {
+        userInfo.innerHTML = ''; 
+    });
+</script>
+
+</body>
+</html>
